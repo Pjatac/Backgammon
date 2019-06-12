@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="BGClient.Views.ChatPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BGClient.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+	DataContext="{Binding Source={StaticResource Locator}, Path=ChatPageInstance}" Height="500" Width="600">
+
+	<Grid BorderThickness="2" BorderBrush="Red">
+		<StackPanel Orientation="Horizontal">
+			<TextBlock x:Name="userBlock" Text="{Binding MyChat.User1}" FontSize="23" VerticalAlignment="Top" HorizontalAlignment="Left" Height="60" Width="90" FontWeight="Bold" TextAlignment="Center"/>
+			<TextBlock x:Name="secondUserBlock" Text="{Binding MyChat.User2}" FontSize="23" VerticalAlignment="Top" HorizontalAlignment="Right"  Height="60" Width="90" TextAlignment="Center"/>
+		</StackPanel>
+		<ListBox ItemsSource ="{Binding Messages}" FontSize="12" HorizontalAlignment="Left" Height="200" Margin="155,131,0,0" VerticalAlignment="Top" Width="279" FontWeight="Bold">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" VerticalAlignment="Bottom" />
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<TextBox Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Type Here" HorizontalAlignment="Left" Margin="155,330,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="41" Width="279"  Background="#B2FFFFFF"/>
+		<Button Command="{Binding SendMessageCommand}" Content="Send" HorizontalAlignment="Left" Background="#FF4BF347" Margin="446,334,0,0" VerticalAlignment="Top" RenderTransformOrigin="7.042,3.254" Height="33"/>
+		<Button Command="{Binding BackCommand}" Content="Back" HorizontalAlignment="Left" Margin="0,334,0,0" VerticalAlignment="Top" RenderTransformOrigin="7.042,3.254" Height="33"/>
+	</Grid>
+</Page>

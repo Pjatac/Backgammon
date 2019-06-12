@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="BGClient.Views.RegisterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BGClient.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="371.938" Width="306.236"
+	DataContext="{Binding Source={StaticResource Locator}, Path=RegisterPageInstance}">
+
+	<Grid Name="myGrid">
+		<TextBox PlaceholderText="Please, input your name"  Height="35" Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding BGUser.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="280"/>
+		<PasswordBox PlaceholderText="Please, input your password" Password="{Binding BGUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="35" Margin="0,100,0,0" VerticalAlignment="Top" Width="280"/>
+		<PasswordBox PlaceholderText="Please, confirm your password" Password="{Binding BGUser.PassConfirm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="35" Margin="0,150,0,0"  VerticalAlignment="Top" Width="280"/>
+		<Button Content="Registration" HorizontalAlignment="Center" Margin="0, 50, 0, 0" Width="95" Command="{Binding AddNewUserCommand }"/>
+	</Grid>
+</Page>

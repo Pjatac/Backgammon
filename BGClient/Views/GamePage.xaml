@@ -1,0 +1,57 @@
+﻿<Page
+    x:Class="BGClient.Views.GamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:c="using:Microsoft.Xaml.Interactions.Core"
+	xmlns:converters="using:BGClient.Converters"	
+	mc:Ignorable="d"
+    DataContext="{Binding Source={StaticResource Locator}, Path=GamePageInstance}"
+	Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="800" Width="800">
+	<Page.Resources>
+		<converters:DiceConverter x:Key="DiceConverter"/>
+		<converters:ChipConverter x:Key="ChipConverter"/>
+		<converters:PriorityConverter x:Key="PriorityConverter"/>
+		<converters:ThrowConverter x:Key="ThrowConverter"/>
+		<converters:BoardConverter x:Key="BoardConverter"/>
+		<ImageBrush x:Key="playGround" ImageSource="/Assets/myBrd.png" Stretch="Fill"/>
+	</Page.Resources>
+    <Grid Background="Gray">
+		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+			<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+				<TextBlock Text="{Binding MyBoard.User2}"/>
+				<Image Height="30" Width="30" Source="{Binding Priority, Converter={StaticResource PriorityConverter}}"/>
+				<Button Visibility="{Binding MyBoard.Dice1.Active, Converter={StaticResource ThrowConverter}}" Command="{Binding ThrowDicesCommand}" Background="Green" Content="Throw dices"/>
+				<Image Height="30" Width="30" Source="{Binding MyBoard.Dice1.Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DiceConverter}}"/>
+				<Image Height="30" Width="30" Source="{Binding MyBoard.Dice2.Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DiceConverter}}"/>
+				<Button Command="{Binding BackCommand}" Content="Back"/>
+				<TextBlock Text="Your start:"/>
+				<TextBlock Text="{Binding Start, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				<TextBlock Text="Your end:"/>
+				<TextBlock Text="{Binding End, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+			</StackPanel>
+			<Grid Height="650" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center">
+			<GridView Background="{StaticResource playGround}" ItemsSource="{Binding PlayGround, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoardConverter}}" Name="myBoard">
+				<GridView.ItemTemplate>
+					<DataTemplate>
+						<ItemsControl ItemsSource="{Binding Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ChipConverter}}" BorderThickness="2" BorderBrush="Beige">
+						</ItemsControl>
+					</DataTemplate>
+				</GridView.ItemTemplate>
+				<GridView.ItemsPanel>
+					<ItemsPanelTemplate>
+						<ItemsWrapGrid ItemWidth="50" ItemHeight="325" MaximumRowsOrColumns="12" Orientation="Horizontal" />
+				</ItemsPanelTemplate>
+			</GridView.ItemsPanel>
+				<i:Interaction.Behaviors>
+					<c:EventTriggerBehavior EventName="Tapped">
+						<c:InvokeCommandAction Command="{Binding CellSelectedCommand}" CommandParameter="{Binding ElementName=myBoard, Path=SelectedItem}"/>
+					</c:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+			</GridView>
+			</Grid>
+		</StackPanel>
+	</Grid>
+</Page>

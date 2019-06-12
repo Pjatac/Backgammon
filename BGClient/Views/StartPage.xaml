@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="BGClient.Views.StartPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	DataContext="{Binding Source={StaticResource Locator}, Path=StartPageInstance}"
+	Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="370" Width="300">
+	<Page.Resources>
+
+	</Page.Resources>
+	<Grid Name="myGrid">
+		<StackPanel>
+			<TextBox PlaceholderText="Please, input your name" Height="35" Margin="0,50,0,0" TextWrapping="Wrap" Text="{Binding BGUser.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="220"/>
+			<TextBox PlaceholderText="Please, input your password" Height="35" Margin="0,100,0,0" TextWrapping="Wrap" Text="{Binding BGUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="220"/>
+			<Button Content="Login" HorizontalAlignment="Left" Margin="50,40,0,0" Width="75" Command="{Binding LoginCommand }"/>
+			<Button Content="Registration" HorizontalAlignment="Left" Margin="160,-30,0,0" Width="95" Command="{Binding NavigateToRegCommand}"/>
+		</StackPanel>
+	</Grid>
+</Page>

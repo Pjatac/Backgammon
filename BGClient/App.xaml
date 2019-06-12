@@ -1,0 +1,15 @@
+﻿<Application
+    x:Class="BGClient.App"
+	xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	RequestedTheme="Light">
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="myDict.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+			<vm:ViewModelLocator xmlns:vm="using:BGClient.VM"  x:Key="Locator" />
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>
